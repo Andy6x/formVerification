@@ -3,55 +3,25 @@
 <head>
   <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
   
-  <script type="text/JavaScript">
-  
-  function verification(){
-    var pwd = document.getElementById('input-pwd');
-    var pwdrepeat = document.getElementById('input-pwdrepeat');
-
-    var areEqual = checkIfAreEqual(pwd, pwdrepeat);
-    
-    const output = document.querySelector("#output"); // message field
-
-    if(!areEqual) {
-      pwdrepeat.title = "Passwords do NOT match";
-      output.innerHTML = `Passwords do NOT match`; // print out the result
-    } if(areEqual) {
-      pwdrepeat.title = "Passwords match";
-      output.innerHTML = `Passwords match`; // print out the result
-    }
-  }
-  
-  function checkIfAreEqual(pwd, pwdrepeat) {
-
-    if(pwd.value != pwdrepeat.value) {
-      return false;
-    } else if(pwd.value == pwdrepeat.value) {
-      return true;
-    }
-  }
-
+  <script type="text/JavaScript"> 
+    $(document).ready(function() {
+      const form = document.getElementById('form');
+      form.addEventListener("change",() => {
+          document.getElementById('submitBtn').disabled = !form.checkValidity()
+      });
+    });
   </script>
 </head>
 <body>
-
 <h2>HTML Forms</h2>
-
 <form id="form">
-
-	<label id="uid" for="uid"><b>Username</b></label>
-    <input class="uid" id="input-uid" type="text" name="uid" maxlength="25" pattern="^(?=.*[a-zA-Z])(?=\w*[0-9])\w{8,25}$" title="Your username must be between 8 to 25 characters long and include at least one number" required><br>
-    
-    <label id="pwd" for="pwd"><b>Password</b></label>
-    <input id="input-pwd" type="password" name="pwd" maxlength="25" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W)[a-zA-Z0-9\S]{8,25}$" title="Your password must be between 8 to 25 characters long and include at least one lowercase letter, one uppercase letter, and one special character" required><br>
+  <label id="uid" for="uid"><b>Username</b></label>
+  <input class="uid" id="input-uid" type="text" name="uid" maxlength="25" pattern="^(?=.*[a-zA-Z])(?=\w*[0-9])\w{8,25}$" title="Your username must be between 8 to 25 characters long and include at least one number" required><br>
   
-  <label id="pwdrepeat" for="pwdrepeat"><b>Confirm password</b></label>
-  <input id="input-pwdrepeat" type="password" name="pwdrepeat" maxlength="25" onkeyup="verification()" required>
+  <label id="pwd" for="pwd"><b>Password</b></label>
+  <input id="input-pwd" type="password" name="pwd" maxlength="25" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W)[a-zA-Z0-9\S]{8,25}$" title="Your password must be between 8 to 25 characters long and include at least one lowercase letter, one uppercase letter, and one special character" required><br>
   
   <button id="submitBtn" disabled="disabled">Submit</button>
-</form>
-
-<p id="output"></p>
-
+</form> 
 </body>
 </html>
